@@ -1,5 +1,5 @@
 import Vue from 'https://cdn.jsdelivr.net/npm/vue@latest/dist/vue.esm.browser.min.js'
-import * as axios from 'https://unpkg.com/axios@1.3.4/dist/axios.min.js'
+import axios, * as others from 'https://unpkg.com/axios@1.3.4/dist/axios.min.js'
 import {
     MainTemplate
 } from './templates/main-template.js'
