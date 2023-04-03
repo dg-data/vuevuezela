@@ -4,7 +4,7 @@ import {
     MainTemplate
 } from './templates/main-template.js'
 
-/* Vue.use(VueRouter)
+Vue.use(VueRouter)
 
 const router = new VueRouter({
   routes: [{
@@ -13,7 +13,7 @@ const router = new VueRouter({
     name: "About Us Page"
   }]
 })
-
+/*
 new Vue({
     el: '#app', // This should be the same as your <div id=""> from earlier.
     components: {
@@ -26,6 +26,7 @@ const axios = require('axios')
 */
 new Vue({ //export default {
   el: '#app',
+  router,
   template: MainTemplate,
   computed: {
     // team names
