@@ -1,5 +1,5 @@
 import Vue from 'https://cdn.jsdelivr.net/npm/vue@latest/dist/vue.esm.browser.min.js'
-import defaultAxios from 'https://github.com/bundled-es-modules/axios/raw/master/axios.js' //'https://unpkg.com/axios/dist/axios.min.js'
+import defaultAxios from 'https://raw.githubusercontent.com/bundled-es-modules/axios/master/axios.js' //'https://unpkg.com/axios/dist/axios.min.js'
 import {
     MainTemplate
 } from './templates/main-template.js'
