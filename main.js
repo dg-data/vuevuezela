@@ -1,9 +1,10 @@
 import Vue from 'https://cdn.jsdelivr.net/npm/vue@latest/dist/vue.esm.browser.min.js'
-import axios, * as others from 'https://unpkg.com/axios/dist/axios.min.js'
+import defaultAxios from 'https://github.com/bundled-es-modules/axios/raw/master/axios.js' //'https://unpkg.com/axios/dist/axios.min.js'
 import {
     MainTemplate
 } from './templates/main-template.js'
-Vue.use(axios)
+import defaultAxios from './axios.js';
+const axios = defaultAxios;
 Vue.use(VueRouter)
 /*
 const router = new VueRouter({
