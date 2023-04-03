@@ -16,7 +16,7 @@ const router = new VueRouter({
 })
 
 new Vue({
-    el: '#app', // This should be the same as your <div id=""> from earlier.
+    el: '#app',
     components: {
         'navbar': Navbar
     },
@@ -82,8 +82,8 @@ new Vue({ //export default {
   mounted: function () {
     // get yesterday's games
     var url =
-      'https://it.global.nba.com/stats2/scores/miniscoreboard.json' +
-    //  new Date(new Date().setFullYear(new Date().getFullYear() - 1)).toISOString().slice(0, 4) + '/scores/00_todays_scores.json'
+      'https://it.global.nba.com/stats2/scores/miniscoreboard.json'
+    // + new Date(new Date().setFullYear(new Date().getFullYear() - 1)).toISOString().slice(0, 4) + '/scores/00_todays_scores.json'
     axios.get(url, { crossdomain: true })
       .then(response => {
         var g = []
