@@ -3,7 +3,6 @@ import defaultAxios from 'https://github.com/bundled-es-modules/axios/raw/master
 import {
     MainTemplate
 } from './templates/main-template.js'
-import defaultAxios from './axios.js';
 const axios = defaultAxios;
 Vue.use(VueRouter)
 /*
