@@ -1,7 +1,7 @@
 // Note that these are backticks.
 
 const MainTemplate = `
-<template>
+<!--template-->
   <div id="app">
     <div class='ui centered card'>
 
@@ -89,7 +89,7 @@ const MainTemplate = `
 
     </div>
   </div>
-</template>
+<!--/template-->
 <!--router-view></router-view-->
-
+`
 export { MainTemplate }
