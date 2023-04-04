@@ -113,7 +113,7 @@ new Vue({ //export default {
       // calculate start of the season
       var yy = parseInt(day.getFullYear()) - parseInt(day.getMonth() > 9 ? 0 : 1) - parseInt(this.season) - 2000
       var gameID = this.gameID > '' ? this.gameID : '004' + yy + '0' + this.game
-      var url = 'https://cors.conchbrain.club?https://cdn.nba.com/static/json/liveData/boxscore/boxscore_' +gameID + '.json')
+      var url = 'https://cors.conchbrain.club?https://cdn.nba.com/static/json/liveData/boxscore/boxscore_' +gameID + '.json'
       axios.get(url, { crossdomain: true })
         .then(response => {
           this.results = response.data
