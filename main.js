@@ -32,18 +32,18 @@ new Vue({ //export default {
     // team names
 
     home () {
-      return this.results.g.hls.ta
+      return this.results.game.homeTeam.teamTricode
     },
     visitor () {
-      return this.results.g.vls.ta
+      return this.results.game.awayTeam.teamTricode
     },
     // player stats if played
 
     hPlayers () {
       var self = this
-      return typeof (this.results.g.hls.pstsg) !== 'undefined' ? self.results.g.hls.pstsg.filter(
+      return typeof (this.results.game.homeTeam.players) !== 'undefined' ? self.results.game.homeTeam.players.filter(
         function (player) {
-          return player.min !== 0
+          return player.played == 1
         }
       ) : null
     },
@@ -51,14 +51,14 @@ new Vue({ //export default {
       var self = this
       return typeof (this.results.g.vls.pstsg) !== 'undefined' ? self.results.g.vls.pstsg.filter(
         function (player) {
-          return player.min !== 0
+          return player.played == 1
         }
       ) : null
     },
     // team totals
 
     hTotals () {
-      return this.results.g.hls.tstsg
+      return this.results.game.homeTeam.statistics
     },
     vTotals () {
       return this.results.g.vls.tstsg
@@ -113,12 +113,11 @@ new Vue({ //export default {
       // calculate start of the season
       var yy = parseInt(day.getFullYear()) - parseInt(day.getMonth() > 9 ? 0 : 1) - parseInt(this.season) - 2000
       var gameID = this.gameID > '' ? this.gameID : '004' + yy + '0' + this.game
-      var url = 'https://cors-anywhere.herokuapp.com/http://data.nba.net/v2015/json/mobile_teams/nba/20' +
-        yy + '/scores/gamedetail/' + gameID + '_gamedetail.json'
+      var url = 'https://cors.conchbrain.club?https://cdn.nba.com/static/json/liveData/boxscore/boxscore_' +gameID + '.json')
       axios.get(url, { crossdomain: true })
         .then(response => {
           this.results = response.data
-          this.success = typeof (this.results.g.hls.pstsg) !== 'undefined'
+          this.success = typeof(this.results.game.awayTeam.statistics.points) !== 'undefined'
         })
         .catch(error => {
           console.log(error)
@@ -129,11 +128,11 @@ new Vue({ //export default {
     // stat line from player (or total) object
     stats (player, teamtotal) {
       return player != null ? [
-        player.ln != null ? player.fn + ' ' + player.ln : teamtotal,
-        player.ln != null ? player.min + ':' + ('00' + player.sec).slice(-2) : 'TOTALS',
-        player.fgm, player.fga, player.tpm, player.tpa, player.ftm, player.fta,
-        String(player.reb).concat(player.oreb > 0 ? ' (' + player.oreb + ')' : ''),
-        player.ast, player.stl, player.blk, player.tov, player.fgm * 2 + player.tpm + player.ftm] : []
+        player.name != null ? player.name : teamtotal,
+        player.ln != null ? player.minutes.slice(2, 4) + ':' + ('00' + player.minutes).slice(-2) : 'TOTALS',
+        player.fieldGoalsMade, player.fieldGoalsAttempted, player.threePointersMade, player.threePointersAttempted, player.freeThrowsMade, player.freeThrowsAttempted,
+        String(player.reboundsTotal).concat(player.reboundsOffensive > 0 ? ' (' + player.reboundsOffensive + ')' : ''),
+        player.assists, player.steals, player.blocks, player.turnovers, player.points] : []
     },
 
     filter (arr) {
