@@ -88,11 +88,10 @@ new Vue({ //export default {
     //axios.defaults.headers.common['Access-Control-Allow-Headers'] = "Origin, X-Requested-With, Content-Type, Accept"
     axios.get(url, { crossdomain: true })
       .then(response => {
-        console.log(response)
         var g = []
         var utc = Math.floor((new Date()).getTime() / 1000) //parseInt(round(time.time() * 1000))
-        var key = response.payload.today.games[0].profile.utcMillis < String(utc) ? 'today' : 'previous' 
-        for (var game of response.payload[key].games) {
+        var key = response.data.payload.today.games[0].profile.utcMillis < String(utc) ? 'today' : 'previous' 
+        for (var game of response.data.payload[key].games) {
           g.push(JSON.parse('{"id":"' + game.profile.gameId + '","home":{"nickname":"' + game.homeTeam.profile.abbr + '"},"visitor":{"nickname":"' + game.awayTeam.profile.abbr + '"}}'))
         }
         response.data.sports_content = Object.assign({}, {
