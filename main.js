@@ -82,7 +82,7 @@ new Vue({ //export default {
   mounted: function () {
     // get yesterday's games
     var url =
-      'https://thingproxy.freeboard.io/fetch/https://it.global.nba.com/stats2/scores/miniscoreboard.json'
+      'https://it.global.nba.com/stats2/scores/miniscoreboard.json'
     // + new Date(new Date().setFullYear(new Date().getFullYear() - 1)).toISOString().slice(0, 4) + '/scores/00_todays_scores.json'
     axios.defaults.headers.common['Access-Control-Allow-Origin'] = '*'
     axios.defaults.headers.common['Access-Control-Allow-Headers'] = "Origin, X-Requested-With, Content-Type, Accept"
