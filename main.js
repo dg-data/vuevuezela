@@ -49,7 +49,7 @@ new Vue({ //export default {
     },
     vPlayers () {
       var self = this
-      return typeof (this.results.g.vls.pstsg) !== 'undefined' ? self.results.g.vls.pstsg.filter(
+      return typeof (this.results.game.awayTeam.players) !== 'undefined' ? self.results.game.awayTeam.players.filter(
         function (player) {
           return player.played == 1
         }
@@ -61,7 +61,7 @@ new Vue({ //export default {
       return this.results.game.homeTeam.statistics
     },
     vTotals () {
-      return this.results.g.vls.tstsg
+      return this.results.game.awayTeam.statistics
     }
   },
 
@@ -129,7 +129,7 @@ new Vue({ //export default {
     stats (player, teamtotal) {
       return player != null ? [
         player.name != null ? player.name : teamtotal,
-        player.ln != null ? player.minutes.slice(2, 4) + ':' + ('00' + player.minutes).slice(-2) : 'TOTALS',
+        player.name != null ? player.minutes.slice(2, 4) + ':' + ('00' + player.minutes).slice(-2) : 'TOTALS',
         player.fieldGoalsMade, player.fieldGoalsAttempted, player.threePointersMade, player.threePointersAttempted, player.freeThrowsMade, player.freeThrowsAttempted,
         String(player.reboundsTotal).concat(player.reboundsOffensive > 0 ? ' (' + player.reboundsOffensive + ')' : ''),
         player.assists, player.steals, player.blocks, player.turnovers, player.points] : []
