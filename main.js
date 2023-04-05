@@ -127,12 +127,13 @@ new Vue({ //export default {
 
     // stat line from player (or total) object
     stats (player, teamtotal) {
+      var values = player.statistics
       return player != null ? [
         player.name != null ? player.name : teamtotal,
-        player.name != null ? player.minutes.slice(2, 4) + ':' + ('00' + player.minutes).slice(-2) : 'TOTALS',
-        player.fieldGoalsMade, player.fieldGoalsAttempted, player.threePointersMade, player.threePointersAttempted, player.freeThrowsMade, player.freeThrowsAttempted,
-        String(player.reboundsTotal).concat(player.reboundsOffensive > 0 ? ' (' + player.reboundsOffensive + ')' : ''),
-        player.assists, player.steals, player.blocks, player.turnovers, player.points] : []
+        player.name != null ? values.minutes.slice(2, 4) + ':' + ('00' + values.minutes).slice(-2) : 'TOTALS',
+        values.fieldGoalsMade, values.fieldGoalsAttempted, values.threePointersMade, values.threePointersAttempted, values.freeThrowsMade, values.freeThrowsAttempted,
+        String(values.reboundsTotal).concat(values.reboundsOffensive > 0 ? ' (' + values.reboundsOffensive + ')' : ''),
+        values.assists, values.steals, values.blocks, values.turnovers, values.points] : []
     },
 
     filter (arr) {
