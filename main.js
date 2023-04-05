@@ -127,7 +127,7 @@ new Vue({ //export default {
 
     // stat line from player (or total) object
     stats (player, teamtotal) {
-      var values = player.statistics
+      var values = player.name != null ? player.statistics : player
       return player != null ? [
         player.name != null ? player.name : teamtotal,
         player.name != null ? values.minutes.slice(2, 4) + ':' + ('00' + values.minutes).slice(-2) : 'TOTALS',
