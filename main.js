@@ -62,6 +62,9 @@ new Vue({ //export default {
     },
     vTotals () {
       return this.results.game.awayTeam.statistics
+    },
+    diff () {
+      return abs(this.results.game.homeTeam.score - this.results.game.awayTeam.score)
     }
   },
 
@@ -130,7 +133,7 @@ new Vue({ //export default {
       var values = player.name != null ? player.statistics : player
       return player != null ? [
         player.name != null ? player.name : teamtotal,
-        player.name != null ? values.minutes.slice(2, 4) + ':' + ('00' + values.minutes).slice(-2) : 'TOTALS',
+        player.name != null ? values.minutes.slice(2, 4) + ':' + ('00' + values.minutes).slice(-3, 2) : 'TOTALS',
         values.fieldGoalsMade, values.fieldGoalsAttempted, values.threePointersMade, values.threePointersAttempted, values.freeThrowsMade, values.freeThrowsAttempted,
         String(values.reboundsTotal).concat(values.reboundsOffensive > 0 ? ' (' + values.reboundsOffensive + ')' : ''),
         values.assists, values.steals, values.blocks, values.turnovers, values.points] : []
