@@ -133,7 +133,7 @@ new Vue({ //export default {
       var values = player.name != null ? player.statistics : player
       return player != null ? [
         player.name != null ? player.name : teamtotal,
-        player.name != null ? values.minutes.slice(2, 4) + ':' + ('00' + values.minutes).slice(-3, 2) : 'TOTALS',
+        player.name != null ? values.minutes.slice(2, 4) + ':' + ('00' + values.minutes).slice(-3, -1) : 'TOTALS',
         values.fieldGoalsMade, values.fieldGoalsAttempted, values.threePointersMade, values.threePointersAttempted, values.freeThrowsMade, values.freeThrowsAttempted,
         String(values.reboundsTotal).concat(values.reboundsOffensive > 0 ? ' (' + values.reboundsOffensive + ')' : ''),
         values.assists, values.steals, values.blocks, values.turnovers, values.points] : []
