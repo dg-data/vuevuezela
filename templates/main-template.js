@@ -1,4 +1,4 @@
-// Note that these are backticks.
+// Note the backticks
 
 const MainTemplate = `
 <!--template-->
@@ -48,7 +48,10 @@ const MainTemplate = `
           <tr>
             <th v-bind:class="{ 'three wide': index == 0 }"
               v-for="(header, index) in columns" v-bind:key="index">
+              <span v-if="index == 0">( {{ diff }} )</span>
+              <template v-else>
                 {{ header }}
+              </template>
             </th>
           </tr>
         </thead>
