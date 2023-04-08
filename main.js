@@ -95,7 +95,9 @@ new Vue({ //export default {
         var utc = Math.floor((new Date()).getTime() / 1000) //parseInt(round(time.time() * 1000))
         var key = response.data.payload.today.games[0].profile.utcMillis < String(utc) ? 'today' : 'previous' 
         for (var game of response.data.payload[key].games) {
-          g.push(JSON.parse('{"id":"' + game.profile.gameId + '","home":{"nickname":"' + game.homeTeam.profile.abbr + '"},"visitor":{"nickname":"' + game.awayTeam.profile.abbr + '"}}'))
+          var hName = game.homeTeam.profile.abbr.slice(0, 1) == 'L' ? game.homeTeam.profile.nameEn : game.homeTeam.profile.cityEn
+          var vName = game.awayTeam.profile.abbr.slice(0, 1) == 'L' ? game.awayTeam.profile.nameEn : game.awayTeam.profile.cityEn
+          g.push(JSON.parse('{"id":"' + game.profile.gameId + '","home":{"nickname":"' + hName + '"},"visitor":{"nickname":"' + vName + '"}}'))
         }
         response.data.sports_content = Object.assign({}, {
           games: {
