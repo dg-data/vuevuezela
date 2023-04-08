@@ -64,7 +64,7 @@ new Vue({ //export default {
       return this.results.game.awayTeam.statistics
     },
     diff () {
-      return abs(this.results.game.homeTeam.score - this.results.game.awayTeam.score)
+      return Math.abs(this.results.game.homeTeam.score - this.results.game.awayTeam.score)
     }
   },
 
