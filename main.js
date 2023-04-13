@@ -1,31 +1,10 @@
 import Vue from 'https://cdn.jsdelivr.net/npm/vue@latest/dist/vue.esm.browser.min.js'
-//import defaultAxios from 'https://raw.githubusercontent.com/bundled-es-modules/axios/master/axios.js' //'https://unpkg.com/axios/dist/axios.min.js'
 import axios from 'https://cdn.skypack.dev/axios'
 import {
     MainTemplate
 } from './templates/main-template.js'
-//const axios = defaultAxios;
-Vue.use(VueRouter)
-/*
-const router = new VueRouter({
-  routes: [{
-    path: '/about',
-    component: About,
-    name: "About Us Page"
-  }]
-})
 
-new Vue({
-    el: '#app',
-    components: {
-        'navbar': Navbar
-    },
-    router,
-    template: MainTemplate
-})
-const axios = require('axios')
-*/
-new Vue({ //export default {
+new Vue(
   el: '#app',
   template: MainTemplate,
   computed: {
@@ -37,7 +16,7 @@ new Vue({ //export default {
     visitor () {
       return this.results.game.awayTeam.teamTricode
     },
-    // player stats if played
+    // player stats (if played)
 
     hPlayers () {
       var self = this
@@ -75,7 +54,7 @@ new Vue({ //export default {
       game: '0820', // four digit number padded with zeros
       success: true,
       columns: ['PLAYER', 'MIN', 'FGM', 'FGA', 'TPM', 'TPA', 'FTM', 'FTA',
-        'REB', 'AST', 'STL', 'BLK', 'TOV', 'PTS'],
+                'REB', 'AST', 'STL', 'BLK', 'TOV', 'PTS'],
       aligned: [0, 0, 1, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0], // 1 for aligned columns
       games: null,
       gameID: null // when selected from dropdown list
@@ -83,12 +62,8 @@ new Vue({ //export default {
   },
 
   mounted: function () {
-    // get yesterday's games
-    var url =
-      'https://cors.conchbrain.club?https://it.global.nba.com/stats2/scores/miniscoreboard.json'
-    // + new Date(new Date().setFullYear(new Date().getFullYear() - 1)).toISOString().slice(0, 4) + '/scores/00_todays_scores.json'
-    //axios.defaults.headers.common['Access-Control-Allow-Origin'] = '*'
-    //axios.defaults.headers.common['Access-Control-Allow-Headers'] = "Origin, X-Requested-With, Content-Type, Accept"
+    // get fresh score
+    var url = 'https://cors.conchbrain.club?https://it.global.nba.com/stats2/scores/miniscoreboard.json'
     axios.get(url, { crossdomain: true })
       .then(response => {
         var g = []
@@ -97,7 +72,7 @@ new Vue({ //export default {
         for (var game of response.data.payload[key].games) {
           var hName = game.homeTeam.profile.abbr.slice(0, 1) == 'L' ? game.homeTeam.profile.nameEn : game.homeTeam.profile.cityEn
           var vName = game.awayTeam.profile.abbr.slice(0, 1) == 'L' ? game.awayTeam.profile.nameEn : game.awayTeam.profile.cityEn
-          g.push(JSON.parse('{"id":"' + game.profile.gameId + '","home":{"nickname":"' + hName + '"},"visitor":{"nickname":"' + vName + '"}}'))
+          g.push(JSON.parse('{"id":"' + game.profile.gameId + '","home": {"nickname":"' + hName + '"},"visitor": {"nickname":"' + vName + '"}}'))
         }
         response.data.sports_content = Object.assign({}, {
           games: {
@@ -132,11 +107,13 @@ new Vue({ //export default {
 
     // stat line from player (or total) object
     stats (player, teamtotal) {
-      var values = player.name != null ? player.statistics : player
-      return player != null ? [
-        player.name != null ? player.name : teamtotal,
-        player.name != null ? values.minutes.slice(2, 4) + ':' + ('00' + values.minutes).slice(-6, -4) : 'TOTALS',
-        values.fieldGoalsMade, values.fieldGoalsAttempted, values.threePointersMade, values.threePointersAttempted, values.freeThrowsMade, values.freeThrowsAttempted,
+      var name = player.name
+      var values = name != null ? player.statistics : player
+      return player != null ?
+        [name != null ? name : teamtotal,
+        name != null ? values.minutes.slice(2, 4) + ':' + ('00' + values.minutes).slice(-6, -4) : 'TOTALS',
+        values.fieldGoalsMade, values.fieldGoalsAttempted, values.threePointersMade, values.threePointersAttempted,
+        values.freeThrowsMade, values.freeThrowsAttempted,
         String(values.reboundsTotal).concat(values.reboundsOffensive > 0 ? ' (' + values.reboundsOffensive + ')' : ''),
         values.assists, values.steals, values.blocks, values.turnovers, values.points] : []
     },
