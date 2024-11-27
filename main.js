@@ -4,7 +4,7 @@ import {
     MainTemplate
 } from './templates/main-template.js'
 
-new Vue(
+new Vue({
   el: '#app',
   template: MainTemplate,
   computed: {
